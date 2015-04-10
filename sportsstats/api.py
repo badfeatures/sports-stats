@@ -1,6 +1,6 @@
 from datetime import datetime
 from requests.exceptions import ConnectionError, SSLError
-from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
+from requests.packages.urllib3.exceptions import ReadTimeoutError
 from .exceptions import *
 
 import requests
@@ -101,7 +101,7 @@ class StatsAPI(object):
                 files=files,
                 # proxies=self.proxies
             )
-        except (ConnectionError, ProtocolError, ReadTimeoutError,
+        except (ConnectionError, ReadTimeoutError,
                 SSLError, ssl.SSLError, socket.error) as e:
             raise StatsConnectionError(e)
         return StatsResponse(r)
