@@ -60,7 +60,7 @@ setup(
     url='https://github.com/sportsy/sports-stats',
     author=__author__,
     license=__license__,
-    packages=['sportsstats'],
+    packages=find_packages(exclude=['tests.*', 'tests']),
     include_package_data=True,
     test_suite='nose.collector',
     install_requires=install_requires,
