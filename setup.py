@@ -64,7 +64,7 @@ with open('requirements-dev.txt') as f:
     tests_require = f.read().splitlines()
 
 setup(
-    name='sports-stats',
+    name='sportsstats',
     version=__version__,
     description='',
     long_description=get_readme(),
