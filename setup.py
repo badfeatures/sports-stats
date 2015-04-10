@@ -2,7 +2,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from __future__ import absolute_import
-from setuptools import setup, find_packages, Command
+
+try:
+    from setuptools import setup, Command
+except ImportError:
+    from distutils.core import setup, Command
+
+
 import re
 import os
 import codecs
@@ -58,7 +64,7 @@ with open('requirements-dev.txt') as f:
     tests_require = f.read().splitlines()
 
 setup(
-    name='sportsstats',
+    name='sports-stats',
     version=__version__,
     description='',
     long_description=get_readme(),
