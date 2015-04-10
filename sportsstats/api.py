@@ -1,6 +1,6 @@
 from datetime import datetime
-from requests.exceptions import ConnectionError, SSLError
-from requests.packages.urllib3.exceptions import ReadTimeoutError
+from requests.exceptions import ConnectionError, ReadTimeout, SSLError
+from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from .exceptions import *
 
 import requests
@@ -101,7 +101,7 @@ class StatsAPI(object):
                 files=files,
                 # proxies=self.proxies
             )
-        except (ConnectionError, ReadTimeoutError,
+        except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                 SSLError, ssl.SSLError, socket.error) as e:
             raise StatsConnectionError(e)
         return StatsResponse(r)
@@ -146,16 +146,3 @@ class StatsResponse(object):
     def json(self):
         """:returns: response as JSON object."""
         return self.response.json()
-
-    def get_rest_quota(self):
-        """:returns: Quota information in the REST-only response header."""
-        remaining, limit, reset = None, None, None
-        if self.response:
-            if 'x-rate-limit-remaining' in self.response.headers:
-                remaining = int(
-                    self.response.headers['x-rate-limit-remaining'])
-                if remaining == 0:
-                    limit = int(self.response.headers['x-rate-limit-limit'])
-                    reset = int(self.response.headers['x-rate-limit-reset'])
-                    reset = datetime.fromtimestamp(reset)
-        return {'remaining': remaining, 'limit': limit, 'reset': reset}
