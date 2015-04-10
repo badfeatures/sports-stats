@@ -43,6 +43,13 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
+def get_readme():
+    try:
+        with open('README.rst') as f:
+            return f.read().strip()
+    except IOError:
+        return ''
+
 
 with open('requirements.txt') as f:
     install_requires = f.read().splitlines()
@@ -50,26 +57,29 @@ with open('requirements.txt') as f:
 with open('requirements-dev.txt') as f:
     tests_require = f.read().splitlines()
 
-print install_requires
-print tests_require
-
 setup(
     name='sports-stats',
     version=__version__,
     description='',
-    url='https://github.com/sportsy/sports-stats',
+    long_description=get_readme(),
     author=__author__,
-    license=__license__,
-    packages=find_packages(exclude=['tests.*', 'tests']),
-    include_package_data=True,
-    test_suite='nose.collector',
+    url='https://github.com/sportsy/sports-stats',
+    packages=('sportsstats',),
+    package_data={'sportsstats': __version__},
     install_requires=install_requires,
     dependency_links=['https://github.com/kennethreitz/requests/tarball/master#egg=requests==2.6.0'],
+    test_suite='nose.collector',
     tests_require=tests_require,
     cmdclass = {'test': PyTest},
-    #entry_points={
-    #     'console_scripts': [
-    #         'sportsstats = sportsstats.api:main',
-    #     ]
-    # },
+    classifiers=[
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+     ],
 )
