@@ -2,13 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from __future__ import absolute_import
-
-try:
-    from setuptools import setup, Command
-except ImportError:
-    from distutils.core import setup, Command
-
-
+from setuptools import setup, find_packages, Command
 import re
 import os
 import codecs
@@ -49,13 +43,6 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-def get_readme():
-    try:
-        with open('README.rst') as f:
-            return f.read().strip()
-    except IOError:
-        return ''
-
 
 with open('requirements.txt') as f:
     install_requires = f.read().splitlines()
@@ -63,28 +50,26 @@ with open('requirements.txt') as f:
 with open('requirements-dev.txt') as f:
     tests_require = f.read().splitlines()
 
+print install_requires
+print tests_require
+
 setup(
     name='sportsstats',
     version=__version__,
     description='',
-    long_description=get_readme(),
-    author=__author__,
     url='https://github.com/sportsy/sports-stats',
+    author=__author__,
+    license=__license__,
     packages=['sportsstats'],
+    include_package_data=True,
+    test_suite='nose.collector',
     install_requires=install_requires,
     dependency_links=['https://github.com/kennethreitz/requests/tarball/master#egg=requests==2.6.0'],
-    test_suite='nose.collector',
     tests_require=tests_require,
     cmdclass = {'test': PyTest},
-    classifiers=[
-        'Intended Audience :: Developers',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-     ],
+    #entry_points={
+    #     'console_scripts': [
+    #         'sportsstats = sportsstats.api:main',
+    #     ]
+    # },
 )
