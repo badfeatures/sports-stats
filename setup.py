@@ -65,9 +65,6 @@ setup(
     author=__author__,
     url='https://github.com/sportsy/sports-stats',
     packages=['sportsstats'],
-    package_data={
-        'sportsstats': [__version__]
-    },
     install_requires=install_requires,
     dependency_links=['https://github.com/kennethreitz/requests/tarball/master#egg=requests==2.6.0'],
     test_suite='nose.collector',
