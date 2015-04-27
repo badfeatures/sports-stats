@@ -43,9 +43,6 @@ class StatsAPI(object):
     def _prepare_url(self, domain, path, params=None):
         auth = self.generate_auth()
         url = '{}{}?api_key={}&sig={}'.format(domain, path, auth['api_key'], auth['sig'])
-        if params is not None:
-            for k in params:
-                url += '&{}={}'.format(str(k), str(params[k]))
         return url
 
     def _get_endpoint(self, resource, params=None):

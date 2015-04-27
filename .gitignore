@@ -60,4 +60,4 @@ target/
 .idea/
 
 #Testing
-test_config.py
+sportsstats/tests/config.py
