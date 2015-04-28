@@ -8,15 +8,15 @@ import os
 import codecs
 
 __title__ = 'Stats, LLC API Wrapper'
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 __author__ = 'Sportsy, Inc.'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Sportsy, Inc.'
 
 
-
 class PyTest(Command):
     user_options = []
+
     def initialize_options(self):
         pass
 
@@ -28,6 +28,7 @@ class PyTest(Command):
         import sys
         errno = subprocess.call([sys.executable, 'runtests.py'])
         raise SystemExit(errno)
+
 
 def read(*parts):
     path = os.path.join(os.path.dirname(__file__), *parts)
