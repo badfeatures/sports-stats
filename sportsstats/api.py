@@ -42,6 +42,9 @@ class StatsAPI(object):
     def _prepare_url(self, domain, path, params=None):
         auth = self.generate_auth()
         url = '{}{}?api_key={}&sig={}'.format(domain, path, auth['api_key'], auth['sig'])
+        if params is not None:
+            for k in params:
+                url += '&{}={}'.format(str(k), str(params[k]))
         return url
 
     def _get_endpoint(self, resource, params=None):
@@ -82,20 +85,12 @@ class StatsAPI(object):
         url = self._prepare_url(subdomain, resource, params)
         session.stream = False
         timeout = REST_TIMEOUT
-        if method == 'POST':
-            data = params
-            params = None
-        else:
-            data = None
         try:
             r = session.request(
                 method,
                 url,
-                data=data,
-                params=params,
                 timeout=timeout,
                 files=files,
-                # proxies=self.proxies
             )
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                 SSLError, ssl.SSLError, socket.error) as e:
