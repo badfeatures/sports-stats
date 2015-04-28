@@ -1,4 +1,3 @@
-from datetime import datetime
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from .exceptions import *
@@ -139,6 +138,11 @@ class StatsResponse(object):
     def text(self):
         """:returns: Raw API response text."""
         return self.response.text
+
+    @property
+    def url(self):
+        """:returns: Raw API response url."""
+        return self.response.url
 
     def json(self):
         """:returns: response as JSON object."""
