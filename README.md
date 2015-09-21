@@ -23,7 +23,7 @@ To install sports-stats using `pip` from GitHub:
 You can make a simple call with this API wrapper, below is an example to get a MLB team's information. Please refer to the IO docs on Stats for endpoints and data returned.
 
 ```python
-from stats import StatsAPI
+from sportsstats import StatsAPI
 
 #Get a team's schedule
 api = StatsAPI('API_KEY', 'API_SECRET')
@@ -34,7 +34,7 @@ The wrapper itself is pretty flexible allowing both rest url parameters and get 
 
 To make requests, you can keep the same structure as the endpoints on Stats documentation and the second argument in the request method is the rest URL params you want to replace with their values. The third argument is the URL get parameters. Both of these method arguments take a *dictionary*.
 ```python
-from stats import StatsAPI
+from sportsstats import StatsAPI
 
 #Get an event's score
 api = StatsAPI('API_KEY', 'API_SECRET')
@@ -43,7 +43,7 @@ print resp.json()
 ```
 
 ```python
-from stats import StatsAPI
+from sportsstats import StatsAPI
 
 #Get information about a specific MLB team
 api = StatsAPI('API_KEY', 'API_SECRET')
