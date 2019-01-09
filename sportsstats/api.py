@@ -1,15 +1,16 @@
-from requests.exceptions import ConnectionError, ReadTimeout, SSLError
-from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
-from .exceptions import *
-
 import requests
 import hashlib
 import socket
 import ssl
 import time
 
+from requests.exceptions import ConnectionError, ReadTimeout, SSLError
+from urllib3.exceptions import ReadTimeoutError, ProtocolError
+from .exceptions import *
+
+
 BASE_URL = 'http://api.stats.com/v1'
-REST_TIMEOUT = None
+REST_TIMEOUT = 30.0
 API_SECRET = None
 
 
